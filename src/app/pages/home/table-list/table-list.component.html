@@ -22,7 +22,7 @@
                                     <th>TELEFONO</th>
                                     <th>OBSEQUIO</th>
                                     <th></th>
-                                    
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,12 +35,15 @@
                                     <td>{{item.payment}}</td>
                                     <td>{{item.status}}</td>
                                     <td>{{item.observaciones}}</td>
-                                    <td>{{item.nrotel}}</td>
+                                    <td class="text-red">{{item.nrotel}}</td>
 
                                     <td onerror="NO">{{item.Regaloprimeracompra}}</td>
                                     <td>
                                         <button class="btn btn-primary btn-lg" data-backdrop="false" data-toggle="modal" data-target="#myModal" (click)="GetOrderbyId(item.idpedido)"><i class="material-icons">note_add</i></button>
                                     
+                                    </td>
+                                    <td> 
+                                        <button class="btn md-raised md-warn btn-lg" (click)="finalizarbyId(item.idpedido)"><i class="material-icons">offline_pin</i></button> 
                                     </td>
                                        
                                 </tr>
@@ -78,9 +81,9 @@
                             <tbody>
                                 <tr *ngFor="let detalle of ordenes; let i=index" [attr.data-index]="i" >
                                     <td>{{detalle.idpedido}}</td>
-                                    <td>{{detalle[i].product}} {{detalle[i].produc_des}}</td>
-                                    <td>{{detalle[i].price}}</td>
-                                    <td class="text-red">{{detalle[i].qty}}</td>
+                                    <td>{{detalle.product}} {{detalle.produc_des}}</td>
+                                    <td>{{detalle.price}}</td>
+                                    <td class="text-red">{{detalle.qty}}</td>
                                     <td>
                                         <!--<button class="btn btn-primary btn-lg" data-backdrop="false" data-toggle="modal" data-target="#myModal" (click)="GetOrderbyId(item.idpedido)"><i class="material-icons">note_add</i></button>
                                         -->
@@ -98,7 +101,3 @@
           </div>
         </div>
       </div>
- 
-
-
-  

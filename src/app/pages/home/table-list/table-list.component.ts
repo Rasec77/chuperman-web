@@ -51,7 +51,15 @@ export class TableListComponent implements OnInit {
           })
       }) */
 
-      this.db.list("/orders").valueChanges().subscribe(order=>{
+     this.db.list("/orders",
+        query => query.orderByChild('status').equalTo('SOLICITADO')
+      )//;
+
+      //console.log(xd);
+
+      //xd
+      .valueChanges()
+      .subscribe(order =>{
         this.orders = order;
         console.log(this.orders);
       })
@@ -61,8 +69,9 @@ export class TableListComponent implements OnInit {
 
 
   public GetOrderbyId(keyorder){
-    this.ordenes = "";
-     this.db.list("/orders-details", ref => ref.orderByChild("idpedido").equalTo(keyorder)).valueChanges().subscribe(
+    this.ordenes = null;
+    this.db.list('/orders-details/'+keyorder).valueChanges().subscribe(
+    // this.db.list("/orders-details", ref => ref.orderByChild("idpedido").equalTo(keyorder)).valueChanges().subscribe(
        orderfilter =>{
         this.ordenes = orderfilter; //Array.of(orderfilter);
 
@@ -74,7 +83,10 @@ export class TableListComponent implements OnInit {
     
     }
 
-
+    public finalizarbyId(keyorder){
+      this.db.database.ref('/orders/'+keyorder).update({status:'FINALIZADO'})
+      alert("Finalizado correctamente");
+      }
     
     
 
