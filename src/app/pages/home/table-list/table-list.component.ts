@@ -85,9 +85,14 @@ export class TableListComponent implements OnInit {
 
     public finalizarbyId(keyorder){
       this.db.database.ref('/orders/'+keyorder).update({status:'FINALIZADO'})
-      alert("Finalizado correctamente");
+      alert('El pedido #' +keyorder + ' fue finalizado correctamente');
       }
     
+
+      public finalizarbyIdRechazado(keyorder){
+        this.db.database.ref('/orders/'+keyorder).update({status:'RECHAZADO'})
+        alert('Se rechazó el pedido #' +keyorder + ' correctamente');
+        }
     
 
 }

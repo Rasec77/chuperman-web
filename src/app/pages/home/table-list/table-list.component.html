@@ -23,6 +23,7 @@
                                     <th>OBSEQUIO</th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,13 +40,17 @@
 
                                     <td onerror="NO">{{item.Regaloprimeracompra}}</td>
                                     <td>
-                                        <button class="btn btn-primary btn-lg" data-backdrop="false" data-toggle="modal" data-target="#myModal" (click)="GetOrderbyId(item.idpedido)"><i class="material-icons">note_add</i></button>
+                                        <button class="btn btn-primary btn-lg" data-backdrop="false" data-toggle="modal" data-target="#myModal" (click)="GetOrderbyId(item.idpedido)"><i class="material-icons">reorder</i></button>
                                     
                                     </td>
                                     <td> 
-                                        <button class="btn md-raised md-warn btn-lg" (click)="finalizarbyId(item.idpedido)"><i class="material-icons">offline_pin</i></button> 
+                                        <button class="btn btn-primary btn-lg" (click)="finalizarbyId(item.idpedido)"><i class="material-icons">done</i></button> 
                                     </td>
-                                       
+                                    
+                                    <td> 
+                                        <button class="btn btn-primary btn-lg" (click)="finalizarbyIdRechazado(item.idpedido)"><i class="material-icons">cancel</i></button> 
+                                    </td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -63,7 +68,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Resumen de Pedido # </h4>
+              <h4 class="modal-title" id="myModalLabel">Resumen de Pedido </h4>
             </div>
             <div class="modal-body">
              
@@ -96,7 +101,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" (click)="Load()">Save changes</button>
+            <!--  <button type="button" class="btn btn-primary" (click)="Load()">Save changes</button> -->
             </div>
           </div>
         </div>
