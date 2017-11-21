@@ -9,6 +9,8 @@ import { HomeComponent } from './home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
+import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
+
 import { TypographyComponent } from './typography/typography.component';
 import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
@@ -29,6 +31,7 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
     DashboardComponent, 
     UserProfileComponent, 
     TableListComponent, 
+    ListaPedidosComponent,
     TypographyComponent, 
     IconsComponent, 
     MapsComponent, 

@@ -1,0 +1,108 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header" data-background-color="red">
+                        <h4 class="title">Chuperpedidos</h4>
+                        <p class="category">Lista de pedidos históricos</p>
+                    </div>
+                    <div class="card-content table-responsive">
+                        <table class="table" >
+                            <thead class="text-danger">
+                                <tr>
+                                    <th># PEDIDO</th>
+                                    <th>USUARIO</th>
+                                    <th>FECHA</th>
+                                    <th>TOTAL</th>
+                                    <th>UBICACIÓN</th>
+                                    <th>PAGO</th>
+                                    <th>ESTADO</th>
+                                    <th>COMENTARIO</th>
+                                    <th>TELEFONO</th>
+                                    <th>OBSEQUIO</th>
+                                    <th></th>
+                                    <!--<th></th>
+                                    <th></th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of (orders)?.slice().reverse()">
+                                    <td>{{item.idpedido}}</td>
+                                    <td>{{item.cliente}}</td>
+                                    <td>{{item.fechaPedido}}</td>
+                                    <td class="text-red">S/. {{item.total}}.00</td>
+                                    <td>{{item.adress_id}}</td>
+                                    <td>{{item.payment}}</td>
+                                    <td>{{item.status}}</td>
+                                    <td>{{item.observaciones}}</td>
+                                    <td class="text-red">{{item.nrotel}}</td>
+
+                                    <td onerror="NO">{{item.Regaloprimeracompra}}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-lg" data-backdrop="false" data-toggle="modal" data-target="#myModal" (click)="GetOrderbyId(item.idpedido)"><i class="material-icons">reorder</i></button>
+                                    
+                                    </td>
+                                   <!-- <td> 
+                                        <button class="btn btn-primary btn-lg" (click)="finalizarbyId(item.idpedido)"><i class="material-icons">done</i></button> 
+                                    </td>
+                                    
+                                    <td> 
+                                        <button class="btn btn-primary btn-lg" (click)="finalizarbyIdRechazado(item.idpedido)"><i class="material-icons">cancel</i></button> 
+                                    </td>-->
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal" id="myModal" tabindex="-1" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Resumen de Pedido </h4>
+            </div>
+            <div class="modal-body">
+             
+                    <table class="table" >
+                            <thead class="text-danger">
+                                <tr>
+                                    <th># PEDIDO</th>
+                                    <th>Detalle Producto</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let detalle of ordenes; let i=index" [attr.data-index]="i" >
+                                    <td>{{detalle.idpedido}}</td>
+                                    <td>{{detalle.product}} {{detalle.produc_des}}</td>
+                                    <td>{{detalle.price}}</td>
+                                    <td class="text-red">{{detalle.qty}}</td>
+                                    <td>
+                                        <!--<button class="btn btn-primary btn-lg" data-backdrop="false" data-toggle="modal" data-target="#myModal" (click)="GetOrderbyId(item.idpedido)"><i class="material-icons">note_add</i></button>
+                                        -->
+                                    </td>
+                                       
+                                </tr>
+                            </tbody>
+                        </table>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!--  <button type="button" class="btn btn-primary" (click)="Load()">Save changes</button> -->
+            </div>
+          </div>
+        </div>
+      </div>

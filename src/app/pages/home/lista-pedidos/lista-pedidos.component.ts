@@ -8,16 +8,15 @@ import { style } from "@angular/core";
 import { transition } from "@angular/core";
 import { trigger } from "@angular/core";
 
-//import { PushNotificationComponent } from 'ng2-notifications';
 
 @Component({
-  selector: 'app-table-list',
-  templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.css']
+  selector: 'app-lista-pedidos',
+  templateUrl: './lista-pedidos.component.html',
+  styleUrls: ['./lista-pedidos.component.css']
 })
 
 
-export class TableListComponent implements OnInit {
+export class ListaPedidosComponent implements OnInit {
   public orders;
   public ordenes: any;
 
@@ -52,15 +51,7 @@ export class TableListComponent implements OnInit {
           })
       }) */
 
-     this.db.list("/orders",
-        query => query.orderByChild('status').equalTo('SOLICITADO')
-      )//;
-
-      //console.log(xd);
-
-      //xd
-      .valueChanges()
-      .subscribe(order =>{
+     this.db.list("/orders").valueChanges().subscribe(order =>{
         this.orders = order;
         console.log(this.orders);
       })
