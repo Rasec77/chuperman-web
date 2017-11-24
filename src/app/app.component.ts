@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,6 +16,9 @@ export class AppComponent implements OnInit {
     if (this.location.path() =='' || this.location.path() == '/home') {
       this.router.navigate(['/home/table-list']);
     }
+
+    
+
   }
 
 }

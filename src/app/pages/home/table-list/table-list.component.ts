@@ -2,18 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { animate } from "@angular/core";
+import { animate,NgModule } from "@angular/core";
 import { ChangeDetectorRef } from "@angular/core";
 import { style } from "@angular/core";
 import { transition } from "@angular/core";
 import { trigger } from "@angular/core";
 
+import { ToasterService, Toast } from 'angular2-toaster';
+
 //import { PushNotificationComponent } from 'ng2-notifications';
+
+declare const $: any;
 
 @Component({
   selector: 'app-table-list',
   templateUrl: './table-list.component.html',
   styleUrls: ['./table-list.component.css']
+})
+
+@NgModule({
+  exports: [
+    TableListComponent
+  ]
 })
 
 
@@ -25,46 +35,38 @@ export class TableListComponent implements OnInit {
 
   constructor(
     public db:AngularFireDatabase,
-    private modalService:NgbModal
+    private modalService:NgbModal,private toasterService: ToasterService
   ) { 
     
   }
 
+  
   ngOnInit() {
-    //console.log(this.GetOrders());
     this.GetOrders();
   }
 
   VerDetalle(modal){
-    //id = this.orders;
-    console.log(modal);
+    //console.log(modal);
     this.modalService.open(modal);
   }
 
   public GetOrders(){
-  /* this.db.list('/orders/').valueChanges().subscribe(items => {
-      items.forEach(item => {
-      Object.keys(item).map(key=>item[key]).map(order => {
-      this.orders= order;
-
-      console.log(this.orders);
-              })
-          })
-      }) */
 
      this.db.list("/orders",
         query => query.orderByChild('status').equalTo('SOLICITADO')
-      )//;
-
-      //console.log(xd);
-
-      //xd
+      )
       .valueChanges()
       .subscribe(order =>{
         this.orders = order;
         console.log(this.orders);
-      })
+      });
 
+  
+
+
+      
+
+     
       
   }
 
@@ -85,6 +87,7 @@ export class TableListComponent implements OnInit {
     }
 
     public finalizarbyId(keyorder){
+
       this.db.database.ref('/orders/'+keyorder).update({status:'FINALIZADO'})
       alert('El pedido #' +keyorder + ' fue finalizado correctamente');
       }
@@ -93,7 +96,32 @@ export class TableListComponent implements OnInit {
       public finalizarbyIdRechazado(keyorder){
         this.db.database.ref('/orders/'+keyorder).update({status:'RECHAZADO'})
         alert('Se rechazó el pedido #' +keyorder + ' correctamente');
-        }
+      }
+
+
+
+
+      public VerNotificacion(from: any, align: any){
+
+          const type = ['', 'info', 'success', 'warning', 'danger', 'rose', 'primary'];
+  
+          const color = Math.floor((Math.random() * 6) + 1);
+  
+          $.notify({
+              icon: 'notifications',
+              message: 'Se registró un nuevo pedido'
+          }, {
+              type: type[color],
+              timer: 3000,
+              placement: {
+                  from: from,
+                  align: align
+              }
+          });
+      
+      }
     
+
+      
 
 }
