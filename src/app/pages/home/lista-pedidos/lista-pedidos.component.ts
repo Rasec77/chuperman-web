@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { animate } from "@angular/core";
-import { ChangeDetectorRef } from "@angular/core";
-import { style } from "@angular/core";
-import { transition } from "@angular/core";
-import { trigger } from "@angular/core";
+//import { animate } from "@angular/core";
+//import { ChangeDetectorRef } from "@angular/core";
+//import { style } from "@angular/core";
+//import { transition } from "@angular/core";
+//import { trigger } from "@angular/core";
 
 
 @Component({

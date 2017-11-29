@@ -8,9 +8,6 @@ import { style } from "@angular/core";
 import { transition } from "@angular/core";
 import { trigger } from "@angular/core";
 
-import { ToasterService, Toast } from 'angular2-toaster';
-
-//import { PushNotificationComponent } from 'ng2-notifications';
 
 declare const $: any;
 
@@ -30,64 +27,65 @@ declare const $: any;
 export class TableListComponent implements OnInit {
   public orders;
   public ordenes: any;
-
+  private listsRef;
   public keys: any;
 
   constructor(
     public db:AngularFireDatabase,
-    private modalService:NgbModal,private toasterService: ToasterService
+    private modalService:NgbModal//,private toasterService: ToasterService
   ) { 
-    
+    this.GetOrders();
   }
 
   
   ngOnInit() {
-    this.GetOrders();
+   /* this.listsRef.on('child_added', function(snapshot, prevChildKey) {
+      this.VerNotificacion('bottom','center');
+      var status = snapshot.val();
+      status['$id'] = snapshot.key();
+   })*/
+
+    
   }
 
   VerDetalle(modal){
-    //console.log(modal);
     this.modalService.open(modal);
   }
 
   public GetOrders(){
-
-     this.db.list("/orders",
+    this.listsRef = this.db.list("/orders",
         query => query.orderByChild('status').equalTo('SOLICITADO')
       )
+      
       .valueChanges()
       .subscribe(order =>{
         this.orders = order;
-        console.log(this.orders);
+        this.VerNotificacion('bottom','right');
+        //console.log(this.orders);
       });
+
+
+
+
+
+
+  }
 
   
 
-
-      
-
-     
-      
-  }
 
 
   public GetOrderbyId(keyorder){
     this.ordenes = null;
     this.db.list('/orders-details/'+keyorder).valueChanges().subscribe(
-    // this.db.list("/orders-details", ref => ref.orderByChild("idpedido").equalTo(keyorder)).valueChanges().subscribe(
        orderfilter =>{
-        this.ordenes = orderfilter; //Array.of(orderfilter);
-
-        //let keys = Object.keys(this.ordenes);
-
-        console.log(this.ordenes);
+        this.ordenes = orderfilter; 
+        //console.log(this.ordenes);
       }
      )
-    
     }
 
     public finalizarbyId(keyorder){
-
       this.db.database.ref('/orders/'+keyorder).update({status:'FINALIZADO'})
       alert('El pedido #' +keyorder + ' fue finalizado correctamente');
       }
@@ -103,13 +101,14 @@ export class TableListComponent implements OnInit {
 
       public VerNotificacion(from: any, align: any){
 
+        //this.db.database.ref('/orders/').limitToLast(1).on("child_added",function(snap) {
+         var rf= this.db.database.ref('/orders/').limitToLast(1).once("child_added",function(snap) {     
+          
           const type = ['', 'info', 'success', 'warning', 'danger', 'rose', 'primary'];
-  
           const color = Math.floor((Math.random() * 6) + 1);
-  
           $.notify({
               icon: 'notifications',
-              message: 'Se registró un nuevo pedido'
+              message: 'Validar lista de pedidos'
           }, {
               type: type[color],
               timer: 3000,
@@ -118,8 +117,24 @@ export class TableListComponent implements OnInit {
                   align: align
               }
           });
-      
+          
+        })
+        this.playAudio();
+         
       }
+
+
+      playAudio(){
+          try
+          {
+            let audio = new Audio("../../../../../assets/sound/Space_Alert2.wav");
+            //audio.src = ;
+            audio.load();
+            audio.play();
+          }
+          catch (e){}
+        }
+
     
 
       

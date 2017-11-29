@@ -11,10 +11,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from './../environments/environment';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-import { ToasterModule } from 'angular2-toaster';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,8 +26,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireDatabaseModule,
     AppRoutingModule,
     PagesModule,
-    BrowserAnimationsModule,
-    ToasterModule,
     NgbModule.forRoot()
   ],
   providers: [],
